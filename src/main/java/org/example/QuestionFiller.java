@@ -21,31 +21,31 @@ public class QuestionFiller {
         return true;
     }
 
-    public static boolean addQuestion(List<Question> questions){ //BDD
+    public static void addQuestion(List<Question> questions){
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите вопрос: ");
         String question = sc.nextLine();
-        if (question.isEmpty()){
-            return false;
-        }
         List<String> answers = new ArrayList<>();
         String correctAnswer = "";
         for (int i=0; i<3; i++){
             System.out.println("Введите " + i + "й вариант ответа");
             answers.add(sc.nextLine());
-            if (answers.get(i).isEmpty()){
-                return false;
-            }
         }
         System.out.println("Введите верный вариант ответа");
         correctAnswer = sc.nextLine();
-        if (correctAnswer.isEmpty()){
+        Question q = new Question(question, answers, correctAnswer);
+        if (checkQuestion(questions, q)){
+            questions.add(q);
+        }
+    }
+
+    public static boolean checkQuestion(List<Question> questions, Question question){ //BDD
+        if (question.getQuestion().isEmpty() ||
+            question.getAnswers().stream().anyMatch(String::isEmpty) ||
+            question.getCorrectAnswer().isEmpty()){
             return false;
         }
-        questions.add(new Question(question, answers, correctAnswer));
-
         return true;
-
     }
 
 

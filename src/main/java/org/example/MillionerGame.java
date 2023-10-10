@@ -94,7 +94,6 @@ public class MillionerGame {
     static boolean check(int n, boolean helpCount, int ifHelpUsed){
         int intHelpCount = helpCount ? 1 : 0;
         return  (n > -1 && n < 2 + intHelpCount + ifHelpUsed);
-
     }
 
 
